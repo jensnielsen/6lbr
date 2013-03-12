@@ -305,6 +305,11 @@ int stm32w_radio_set_channel(uint8_t channel)
     return 1;
 }
 /*---------------------------------------------------------------------------*/
+uint8_t stm32w_radio_get_channel()
+{
+  return ST_RadioGetChannel();
+}
+/*---------------------------------------------------------------------------*/
 static int wait_for_tx(void){
 
   struct timer t;
