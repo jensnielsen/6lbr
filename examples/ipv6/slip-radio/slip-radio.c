@@ -66,6 +66,8 @@ int cmd_handler_cc2420(const uint8_t *data, int len);
 int cmd_handler_rf230(const uint8_t *data, int len);
 #elif CONTIKI_TARGET_ECONOTAG
 int cmd_handler_mc1322x(const uint8_t *data, int len);
+#elif CONTIKI_TARGET_MBXXX
+int cmd_handler_stm32w(const uint8_t *data, int len);
 #endif /* CONTIKI_TARGET */
 
 /*---------------------------------------------------------------------------*/
@@ -129,12 +131,12 @@ slip_radio_cmd_handler(const uint8_t *data, int len)
 
       packet_pos++;
       if(packet_pos >= sizeof(packet_ids)) {
-	packet_pos = 0;
+        packet_pos = 0;
       }
 
       return 1;
     }
-  } else if(uip_buf[0] == '?') {
+  } else if(data[0] == '?') {
     PRINTF("Got request message of type %c\n", uip_buf[1]);
     if(data[1] == 'M') {
       /* this is just a test so far... just to see if it works */
